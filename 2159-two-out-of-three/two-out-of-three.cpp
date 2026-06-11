@@ -1,21 +1,33 @@
 class Solution {
 public:
     vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
-        set<int> s1(nums1.begin(), nums1.end());
-        set<int> s2(nums2.begin(), nums2.end());
-        set<int> s3(nums3.begin(), nums3.end());
-
         vector<int> ans;
 
-        for(int i = 1; i <= 100; i++) {
-            int count = 0;
+        for(int i = 0; i < nums1.size(); i++) {
+            for(int j = 0; j < nums2.size(); j++) {
+                if(nums1[i] == nums2[j]) {
+                    if(find(ans.begin(), ans.end(), nums1[i]) == ans.end()) {
+                        ans.push_back(nums1[i]);
+                    }
+                }
+            }
 
-            if(s1.count(i)) count++;
-            if(s2.count(i)) count++;
-            if(s3.count(i)) count++;
+            for(int k = 0; k < nums3.size(); k++) {
+                if(nums1[i] == nums3[k]) {
+                    if(find(ans.begin(), ans.end(), nums1[i]) == ans.end()) {
+                        ans.push_back(nums1[i]);
+                    }
+                }
+            }
+        }
 
-            if(count >= 2) {
-                ans.push_back(i);
+        for(int j = 0; j < nums2.size(); j++) {
+            for(int k = 0; k < nums3.size(); k++) {
+                if(nums2[j] == nums3[k]) {
+                    if(find(ans.begin(), ans.end(), nums2[j]) == ans.end()) {
+                        ans.push_back(nums2[j]);
+                    }
+                }
             }
         }
 
