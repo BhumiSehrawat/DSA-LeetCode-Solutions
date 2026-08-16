@@ -10,23 +10,15 @@
  * };
  */
 class Solution {
-private:
-    void preorder(TreeNode* root,vector<string>& result){
-        if(root==NULL){
-            result.push_back("NULL");
-            return;
-        }
-        result.push_back(to_string(root->val));
-        preorder(root->left,result);
-        preorder(root->right,result);
-    }
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        vector<string> result1;
-        vector<string> result2;
-        preorder(p,result1);
-        preorder(q,result2);
-        return result1==result2;
+        if(p==NULL && q==NULL)
+            return 1;
+        if(p==NULL || q==NULL)
+            return 0;
+        if(p->val!= q->val)
+            return false;
+        return isSameTree(p->left,q->left)&&isSameTree(p->right,q->right);
         
     }
 };
