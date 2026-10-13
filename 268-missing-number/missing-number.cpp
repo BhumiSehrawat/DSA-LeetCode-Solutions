@@ -1,13 +1,18 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
         int n=nums.size();
-        int expected=n*(n+1)/2;
-        int actual=0;
-        for(int x:nums){
-            actual+=x;
+        if(nums[0]!=0){
+            return 0;
         }
-        int ans=expected-actual;
-        return ans;
+        for(int i=0;i<n-1;i++){
+            
+            if(nums[i+1]-nums[i]>1){
+                return nums[i]+1;
+                
+            }
+        }
+        return n;
     }
 };
